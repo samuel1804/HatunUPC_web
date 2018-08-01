@@ -12,6 +12,7 @@ namespace HatunsolWS
     [ServiceContract]
     public interface IUserWS
     {
+        //Prueba
         [WebInvoke(Method = "GET" , UriTemplate = "Usuario/{strLogin}", ResponseFormat = WebMessageFormat.Json, RequestFormat = WebMessageFormat.Json)]
         [OperationContract]
         UserBE ObtenerUsuario(string strLogin);
