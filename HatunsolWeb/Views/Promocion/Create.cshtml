@@ -1,0 +1,708 @@
+﻿@using HatunsolBE;
+@model HatunsolBE.PromocionBE
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<head>
+
+
+
+    <script src="~/Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="~/Content/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+    <script src="~/Content/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="~/Content/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/Content/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+
+    <script src="~/Content/vendors/select2/dist/js/select2.full.min.js"></script>
+
+    <style>
+        td.editar {
+            cursor: pointer;
+        }
+
+        td.eliminar {
+            cursor: pointer;
+        }
+
+        td.link {
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Promociones</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Crear Promoción</h2>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+            <form id="frmdatos" method="post" action="" role="form" class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        Nombre <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <input type="text" placeholder="Nombre" id="Nombre" required class="form-control col-md-7 col-xs-12">
+                    </div>
+
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                        Descripción <span class="required">*</span>
+                    </label>
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <textarea placeholder="Descripción" id="Descripcion" required class="form-control col-md-7 col-xs-12"></textarea>
+
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                        Estado <span class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+
+
+                        <select id="Estado" name="Estado" class="select2_single form-control" tabindex="-1">
+                            <option value="">Seleccione</option>
+                            @foreach (ParametroBE item in ViewBag.Estados)
+                            {
+                                <option value="@item.ParametroId">@item.NombreLargo</option>
+                            }
+                        </select>
+
+
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="ln_solid"></div>
+
+                <h2>Artículos con Baja Rotación</h2>
+                <div class="clearfix"></div>
+
+                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable_rotacion" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc">IdArticulo</th>
+                                        <th class="sorting_asc">Descripcion</th>
+                                        <th class="sorting_asc">Unidad</th>
+                                        <th class="sorting_asc">Cant. Vendida</th>
+                                        <th class="sorting_asc">Costo</th>
+                                        <th class="sorting_asc">Precio</th>
+                                        <th class="">Agregar</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordenes"></tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <fieldset class="well the-fieldset">
+                    <legend class="the-legend">Datos del Articulo</legend>
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            Nombre
+                        </label>
+                        <div class="col-md-8 col-sm-8 col-xs-12">
+                            <input id="NombreArticulo" name="NombreArticulo" disabled class="form-control col-md-7 col-xs-12" data-parsley-required-message="Seleccione un Artículo" type="text">
+                        </div>
+                        <label id="lblUnidad"></label>
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="hidden" id="hfIdArticulo" name="hfIdArticulo" />
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            Costo
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="Costo" name="Costo" disabled onkeyup="CalcularSubTotal()" class="form-control col-md-7 col-xs-12" data-parsley-required-message="Ingrese un nuevo Precio" type="number">
+                        </div>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            Precio
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="Precio" disabled name="Precio" class="form-control col-md-7 col-xs-12" data-parsley-required-message="No se encontro el Precio" type="number">
+                        </div>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            Nuevo Precio
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="NuevoPrecio" name="NuevoPrecio" class="form-control col-md-7 col-xs-12" data-parsley-required-message="Ingrese un nuevo Precio" type="number">
+                        </div>
+                        <input type="hidden" value="1" id="hfOperacion" name="hfOperacion" />
+                        <button type="submit" name="btnAgregar" id="btnAgregar" class="btn btn-round btn-info">Agregar</button>
+
+                    </div>
+
+
+                </fieldset>
+
+                <div class="ln_solid"></div>
+
+                <h2>Artículos para la Promoción</h2>
+                <div class="clearfix"></div>
+
+
+                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc">IdArticulo</th>
+                                        <th class="sorting_asc">Descripcion</th>
+                                        <th class="sorting_asc">Unidad</th>
+                                        <th class="sorting_asc">Costo</th>
+                                        <th class="sorting_asc">Precio</th>
+                                        <th class="sorting_asc">Nuevo Precio</th>
+                                        <th class="">M</th>
+                                        <th class="">E</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordenes"></tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-md-offset-6 col-sm-2 col-xs-12">
+                        TOTAL
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type="text" placeholder="Total" id="Total" name="Total" disabled="disabled" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+
+
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                        <input type="hidden" id="hfIdOrden" name="hfIdOrden" value="0" />
+
+                        <button type="submit" id="btnGuardar" name="btnGuardar" class="btn btn-primary btn-lg">Guardar</button>
+
+                        <button type="submit" onclick="Imprimir(event);" class="btn btn-success btn-lg">Imprimir</button>
+
+                    </div>Fecha
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- jQuery -->
+<!-- Select2 -->
+<!-- Datatables -->
+
+
+
+
+
+<script type="text/javascript">
+    function CargarProducto() {
+        $("#Proveedor").trigger("change");
+        console.log(document.getElementById("Proveedor").value);
+        if (document.getElementById("Proveedor").value == 0) {
+            alert('Seleccione un Proveedor');
+            return;
+        }
+        else if (document.getElementById("Articulos").selectedIndex == 0) {
+            $("#Cantidad").val("");
+            $("#Costo").val("");
+            $("#SubTotal").val("");
+            $("#lblUnidad").text("");
+            //LimpiarArticulo();
+        }
+        else {
+            console.log( $('#Proveedor').val());
+            $.ajax({
+                url: rootDir + "/OrdenCompra/CargarProducto",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                data: {
+
+                    "IdProveedor": $('#Proveedor').val(),
+                    "IdArticulo": $('#Articulos').val(),
+                },
+                dataType: "json",
+                success: function (data) {
+
+                    if ($("#Cantidad").val() == "") {
+                        $("#Cantidad").val(1);
+                    }
+                    var Cantidad = parseFloat($("#Cantidad").val()).toFixed(2);
+
+                    $("#Costo").val(data.Costo.toFixed(2));
+                    $("#SubTotal").val((Cantidad * data.Costo).toFixed(2));
+                    $("#lblUnidad").text(data.UnidadMedida);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+        }
+    }
+    function LimpiarProveedor() {
+        $("#Proveedor_RUC").val("");
+        $("#Proveedor_Direccion").val("");
+    }
+    function LimpiarArticulo() {
+        $("#hfIdArticulo").val("");
+        $("#NombreArticulo").val("");
+        $("#Precio").val("");
+        $("#Costo").val("");
+        $("#NuevoPrecio").val("");
+        $("#lblUnidad").text("");
+
+    }
+    function CargarProveedor() {
+        console.log(document.getElementById("Proveedor").selectedIndex);
+        if (document.getElementById("Proveedor").selectedIndex == 0) {
+            LimpiarProveedor();
+            LimpiarArticulo();
+
+        } else {
+
+            $.ajax({
+                url: rootDir + "/OrdenCompra/CargarProveedor",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                data: {
+                    "IdProveedor": $('#Proveedor').val(),
+                },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.RUC);
+                    console.log(data.Direccion);
+                    $('#Proveedor_RUC').val(data.RUC);
+                    $('#Proveedor_Direccion').val(data.Direccion);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+
+        }
+
+
+    }
+    function CalcularSubTotal() {
+
+        var Cantidad = parseFloat($("#Cantidad").val());
+        var Costo = parseFloat($("#Costo").val());
+        $("#SubTotal").val(Cantidad * Costo);
+    }
+    function CalcularTotal() {
+
+        var table = $("#datatable").DataTable();
+        var da = table.rows().data();
+
+
+        var total = 0;
+        da.each(function (value, index) {
+
+            total += parseFloat(value[5]);
+            console.log(value[5]);
+        });
+
+
+        $("#Total").val(total.toFixed(2));
+    }
+
+
+
+    function onSucess() {
+        alert('1');
+
+    }
+    function modificar() {
+        e.preventDefault();
+
+    }
+</script>
+
+
+<!-- Parsley -->
+<script>
+    var d = new Date();
+    var mindate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+
+    function Imprimir(e) {
+
+        e.preventDefault();
+        console.log($("#hfIdOrden").val());
+        PopupCenter(rootDir + '/OrdenCompra/Imprimir?IdOrden=' + $("#hfIdOrden").val(), 'Orden de Compra', '900', '500');
+    }
+
+
+    $(document).ready(function () {
+
+
+
+        $('#datatable').dataTable(
+    {
+        "sDom": '<"hide"i>rt<"bottom"lp><"clear">',
+        "columnDefs": [
+     {
+         "targets": [0],
+         "visible": false,
+         "searchable": false
+     },
+      {
+          "targets": [6],
+          "className": 'editar',
+          "orderable": false,
+          "data": null,
+          "defaultContent": '<i class="glyphicon glyphicon-edit"></i>'
+      },
+       {
+           "targets": [7],
+           "className": 'eliminar',
+           "orderable": false,
+           "data": null,
+           "defaultContent": '<i class="glyphicon glyphicon-remove"></i>'
+       }
+
+        ],
+        "language": {
+            "sProcessing": "Procesando...",
+            "sLengthMenu": "Mostrar _MENU_ registros",
+            "sZeroRecords": "No se encontraron resultados",
+            "sEmptyTable": "Ningún dato disponible en esta tabla",
+            "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+            "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+            "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+            "sInfoPostFix": "",
+            "sSearch": "Buscar:",
+            "sUrl": "",
+            "sInfoThousands": ",",
+            "sLoadingRecords": "Cargando...",
+            "oPaginate": {
+                "sFirst": "Primero",
+                "sLast": "Último",
+                "sNext": "Siguiente",
+                "sPrevious": "Anterior"
+            },
+            "oAria": {
+                "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+            }
+        }
+    });
+
+
+        $('#datatable_rotacion').dataTable(
+{
+    "sDom": '<"hide"i>rt<"bottom"lp><"clear">',
+    "columnDefs": [
+ {
+     "targets": [0],
+     "visible": false,
+     "searchable": false
+ },
+         {
+             "targets": [6],
+             "className": 'link',
+             "orderable": false,
+             "data": null,
+             "defaultContent": '<a>Agregar</a>'
+         }
+
+    ],
+    "language": {
+        "sProcessing": "Procesando...",
+        "sLengthMenu": "Mostrar _MENU_ registros",
+        "sZeroRecords": "No se encontraron resultados",
+        "sEmptyTable": "Ningún dato disponible en esta tabla",
+        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+        "sInfoPostFix": "",
+        "sSearch": "Buscar:",
+        "sUrl": "",
+        "sInfoThousands": ",",
+        "sLoadingRecords": "Cargando...",
+        "oPaginate": {
+            "sFirst": "Primero",
+            "sLast": "Último",
+            "sNext": "Siguiente",
+            "sPrevious": "Anterior"
+        },
+        "oAria": {
+            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+        }
+    }
+});
+
+
+
+        var articulos = @Html.Raw(ViewBag.Articulos);
+        //Loop through statesAvailable
+        var t = $('#datatable_rotacion').DataTable();
+        console.log(articulos);
+
+        var result = $.grep(articulos, function (e)
+        {
+            console.log(e);
+            t.row.add([
+               e.IdArticulo,
+               e.Nombre,
+                  e.UnidadMedida,
+                  parseFloat(e.Cantidad).toFixed(2),
+                  parseFloat(e.Costo).toFixed(2),
+                  parseFloat(e.Precio).toFixed(2)
+
+            ]).draw();
+        });
+
+
+
+
+        $('#datatable_rotacion tbody').on('click', 'td.link', function (e) {
+            e.preventDefault();
+            var table = $('#datatable_rotacion').DataTable();
+            //console.log(this);
+            var data = table.row(this).data();
+
+            var IdArticulo = data[0];
+            $("#hfIdArticulo").val(IdArticulo);
+            $("#NombreArticulo").val(data[1]);
+            $("#lblUnidad").text(data[2]);
+            $("#Costo").val(data[4]);
+            $("#Precio").val(data[5]);
+            $("#NuevoPrecio").val("");
+
+        });
+
+
+
+        var edit;
+
+
+        $('#datatable tbody').on('click', 'td.editar', function () {
+            var table = $('#datatable').DataTable();
+            console.log(this);
+            var data = table.row(this).data();
+            edit = this;
+            $("#hfIdArticulo").val(data[0]);
+            $("#NombreArticulo").val(data[1]);
+            $("#lblUnidad").text(data[2]);
+            $("#Costo").val(data[3]);
+            $("#Precio").val(data[4]);
+            $("#NuevoPrecio").val(data[5]);
+            $("#hfOperacion").val(2);
+
+            $("#btnAgregar").text("Modificar");
+
+        });
+        $('#datatable tbody').on('click', 'td.eliminar', function () {
+            var table = $('#datatable').DataTable();
+            console.log(this);
+
+            var data = table.row(this).data();
+            table
+          .row($(this).parents('tr'))
+          .remove().draw();
+            CalcularTotal();
+        });
+
+
+        $('#btnAgregar').click(function (e) {
+            e.preventDefault();
+            var validar = true;
+            if (document.getElementById("NombreArticulo").value == "") {
+                validar = false;
+                alert('Seleccione un Articulo');
+                return;
+            }
+            else if (document.getElementById("NuevoPrecio").value == "") {
+                validar = false;
+                alert('Ingrese Nuevo Precio');
+                return;
+            }
+
+
+            var t = $('#datatable').DataTable();
+            var da = t.rows().data();
+            var IdArticulo = $("#hfIdArticulo").val();
+
+            console.log("IdArticulo:"+IdArticulo);
+            var encontrado = false;
+            da.each(function (value, index) {
+                var id = value[0];
+                console.log(value);
+                console.log(id);
+                if (id == IdArticulo) {
+                    encontrado = true;
+                }
+            });
+
+            console.log("Operacion:"+$("#hfOperacion").val());
+            //Insertar
+            if (encontrado == true &&  $("#hfOperacion").val()!=2) {
+                alert("El Item Seleccionado ya existe en la lista, cambie la cantidad.")
+                return;
+            }
+
+
+
+
+            if($("#hfOperacion").val()==2){
+                console.log(edit);
+                da.row(edit).data([    $("#hfIdArticulo").val(),
+                          $("#NombreArticulo").val(),
+                              $("#lblUnidad").text(),
+                              $("#Costo").val(),
+                               $("#Precio").val(),
+                              parseFloat($("#NuevoPrecio").val()).toFixed(2)]).draw();
+
+            }else{
+                t.row.add([
+                            $("#hfIdArticulo").val(),
+                          $("#NombreArticulo").val(),
+                              $("#lblUnidad").text(),
+                              $("#Costo").val(),
+                               $("#Precio").val(),
+                              parseFloat($("#NuevoPrecio").val()).toFixed(2),
+                ]).draw();
+            }
+
+            LimpiarArticulo();
+
+        });
+
+
+
+
+
+        $('#frmdatos').submit(function (e) {
+            var serializedForm = $(this).serialize();
+            var t = $('#datatable').DataTable();
+
+            if (!t.data().count()) {
+                alert("No se ha registrado ningún Artículo");
+                e.preventDefault();
+                return;
+            }
+
+
+            var da = t.rows().data();
+
+            var Articulos = [];
+            da.each(function (value, index) {
+                console.log(value);
+                Articulos.push({ IdArticulo: value[0], Cantidad: value[3], Costo: value[4], SubTotal: value[5] });
+                console.log(Articulos[0]);
+               
+            });
+
+
+            $.ajax({
+                type: 'POST',
+                url: rootDir + '/Promocion/GuardarPromocion',
+                data: {
+                    "Nombre": $('#Nombre').val(),
+                    "Descripcion": $("#Descripcion").val(),
+                    //"FechaInicio": $("#FechaInicio").val(),
+                    //"FechaFin": $("#FechaFin").val(),
+                    "Estado": $("#Estado").val(),
+                    "Articulos": JSON.stringify(Articulos)
+                }
+                ,
+                dataType: 'json',
+                success: function (data) {
+
+
+                    //alert(data.success);
+                    //alert('Hoja de ruta ' + varHojaRutaFormat + zeroPad(varIdHojaRuta, 4) + ' creado.');
+
+                    location.href = rootDir + "/Promocion/Index"
+
+                },
+                error: function () {
+                    alert("Error al Guardar la Promoción");
+                }
+            });
+
+            return false;
+
+        });
+
+
+
+        $(".select2_single").select2({
+            allowClear: true
+        });
+
+        $('#select2_single').on("select2_single:selecting", function (e) {
+            // what you would like to happen
+        });
+
+
+
+
+
+
+
+
+
+    });
+    try {
+        hljs.initHighlightingOnLoad();
+    } catch (err) { }
+</script>
+<!-- /Parsley -->

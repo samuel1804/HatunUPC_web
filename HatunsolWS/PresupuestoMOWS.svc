@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="HatunsolWS.PresupuestoMOWS" CodeBehind="PresupuestoMOWS.svc.cs" Factory="System.ServiceModel.Activation.WebServiceHostFactory" %>

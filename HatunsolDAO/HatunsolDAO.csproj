@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{1D1E7153-B734-462E-A439-550226415DF7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HatunsolDAO</RootNamespace>
+    <AssemblyName>HatunsolDAO</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArticuloDAO.cs" />
+    <Compile Include="DespachoDAO.cs" />
+    <Compile Include="EstablecimientoDAO.cs" />
+    <Compile Include="GuiaRemisionDAO.cs" />
+    <Compile Include="MaestroDAO.cs" />
+    <Compile Include="mdlSGFerreteria.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mdlSGFerreteria.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mdlSGFerreteria.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="mdlSGFerreteria.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mdlSGFerreteria.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ObraDAO.cs" />
+    <Compile Include="OrdenCompraArticuloDAO.cs" />
+    <Compile Include="OrdenCompraDAO.cs" />
+    <Compile Include="ParametroDAO.cs" />
+    <Compile Include="PresupuestoMaterialDAO.cs" />
+    <Compile Include="PresupuestoMODAO.cs" />
+    <Compile Include="PromocionDAO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProveedorDAO.cs" />
+    <Compile Include="SG_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Carta_Aprobacion.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Categoria.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Dominio.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Especialidad.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Establecimiento.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Establecimiento_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_GuiaDespacho.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_GuiaDespacho_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_GuiaRemision.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_GuiaRemision_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_InformeVisita.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Ingeniero.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Maestro.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Maestro_Obra.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Marca.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Obra.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Obra_Material.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Option.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_OrdenCompra.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_OrdenCompra_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Parametro.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Persona.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_PresupuestoMaterial.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_PresupuestoMaterial_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_PresupuestoMo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_PresupuestoMo_Maestro.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Promocion.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Promocion_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Proveedor.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Proveedor_Articulo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Rol.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Rol_Option.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Solicitud.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Solicitud_Persona.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_Ubigeo.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SG_User.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SolicitudDAO.cs" />
+    <Compile Include="sp_ArticulosBajaRotacion_Result.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Maestro_Obra_Listar_Result.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_PresupuestoArticulo_Result.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_PresupuestoMaterial_Result.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_Presupuesto_Material_Detalle_Result.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>mdlSGFerreteria.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UbigeoDAO.cs" />
+    <Compile Include="UserDAO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="mdlSGFerreteria.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>mdlSGFerreteria.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="mdlSGFerreteria.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>mdlSGFerreteria.edmx</DependentUpon>
+      <LastGenOutput>mdlSGFerreteria.Context.cs</LastGenOutput>
+    </None>
+    <None Include="mdlSGFerreteria.edmx.diagram">
+      <DependentUpon>mdlSGFerreteria.edmx</DependentUpon>
+    </None>
+    <None Include="mdlSGFerreteria.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>mdlSGFerreteria.edmx</DependentUpon>
+      <LastGenOutput>mdlSGFerreteria.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HatunsolBE\HatunsolBE.csproj">
+      <Project>{53d05131-664c-4355-a978-8a08e0a39a0c}</Project>
+      <Name>HatunsolBE</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

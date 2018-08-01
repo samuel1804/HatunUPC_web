@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HatunsolDAO", "HatunsolDAO\HatunsolDAO.csproj", "{1D1E7153-B734-462E-A439-550226415DF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HatunsolWS", "HatunsolWS\HatunsolWS.csproj", "{B42A5C6F-1891-4C07-927D-C6917460190B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HatunsolBE", "HatunsolBE\HatunsolBE.csproj", "{53D05131-664C-4355-A978-8A08E0A39A0C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Librerias", "Librerias", "{701D93E3-547B-4196-AE9F-76B14FCABA2A}"
+	ProjectSection(SolutionItems) = preProject
+		Librerias\Iesi.Collections.dll = Librerias\Iesi.Collections.dll
+		Librerias\NHibernate.dll = Librerias\NHibernate.dll
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HatunsolWeb", "HatunsolWeb\HatunsolWeb.csproj", "{0893DF72-CEF9-4942-BA6A-57BD68783472}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D1E7153-B734-462E-A439-550226415DF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D1E7153-B734-462E-A439-550226415DF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D1E7153-B734-462E-A439-550226415DF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D1E7153-B734-462E-A439-550226415DF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B42A5C6F-1891-4C07-927D-C6917460190B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B42A5C6F-1891-4C07-927D-C6917460190B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B42A5C6F-1891-4C07-927D-C6917460190B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B42A5C6F-1891-4C07-927D-C6917460190B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53D05131-664C-4355-A978-8A08E0A39A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53D05131-664C-4355-A978-8A08E0A39A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53D05131-664C-4355-A978-8A08E0A39A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53D05131-664C-4355-A978-8A08E0A39A0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0893DF72-CEF9-4942-BA6A-57BD68783472}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0893DF72-CEF9-4942-BA6A-57BD68783472}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0893DF72-CEF9-4942-BA6A-57BD68783472}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0893DF72-CEF9-4942-BA6A-57BD68783472}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

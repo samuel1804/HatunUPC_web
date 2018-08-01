@@ -1,0 +1,736 @@
+﻿@model HatunsolBE.OrdenCompraBE
+@using HatunsolBE;
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+
+
+    <script src="~/Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="~/Content/vendors/datatables.net-scroller/js/datatables.scroller.min.js"></script>
+    <script src="~/Content/vendors/jszip/dist/jszip.min.js"></script>
+    <script src="~/Content/vendors/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/Content/vendors/pdfmake/build/vfs_fonts.js"></script>
+
+
+    <script src="~/Content/vendors/select2/dist/js/select2.full.min.js"></script>
+
+    <style>
+        td.editar {
+            cursor: pointer;
+        }
+
+        td.eliminar {
+            cursor: pointer;
+        }
+    </style>
+
+
+</head>
+
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Orden de Compra</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>Crear Orden de Compra</h2>
+            <div class="nav panel_toolbox">
+                <label>Nro de Orden</label>
+                <input placeholder="Orden de Compra" type="text" value="0001" />
+
+            </div>
+
+
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+
+            <form id="frmdatos" method="post" action="" role="form" class="form-horizontal form-label-left">
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        Facturar a <span class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(m => m.Establecimiento.RazonSocial, new { @class = "form-control col-md-7 col-xs-12", @placeholder = "Ingrese su Razon Social", @disabled = "disabled", data_message = "Ingrese su Razon Social" })
+                    </div>
+
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="first-name">
+                        Fecha
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        @if (@Model.IdOrdenCompra == 0)
+                        {
+                            <input type="text" placeholder="Fecha del Pedido" id="Fecha" value="@DateTime.Now.ToShortDateString()" disabled="disabled" class="form-control col-md-7 col-xs-12">
+                        }
+                        else
+                        {
+                            var Fecha = (DateTime)Model.Fecha_Ped;
+                            <input type="text" placeholder="Fecha del Pedido" id="Fecha" value="@Fecha.ToShortDateString()" disabled="disabled" class="form-control col-md-7 col-xs-12">
+
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                        Direccion Despacho <span class="required">*</span>
+                    </label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(m => m.Establecimiento.Direccion, new { @class = "form-control col-md-7 col-xs-12", @placeholder = "Direccion de Entrega", @required = "required", data_message = "Ingrese Direccion de Entrega" })
+
+
+                    </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12" for="last-name">
+                        Fecha Requerida <span class="required">*</span>
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        @if (@Model.IdOrdenCompra == 0)
+                        {
+                            <input id="FechaRequerida" name="FechaRequerida" type="text" class="form-control has-feedback-left" required="required" data-parsley-required-message="Ingrese la Fecha Requerida" placeholder="Fecha Requerida" aria-describedby="inputSuccess2Status">
+                        }
+                        else
+                        {
+                            var Fecha = (DateTime)@Model.Fecha_Req;
+                            <input id="FechaRequerida" name="FechaRequerida" value="@Fecha.ToShortDateString()" type="text" class="form-control has-feedback-left" required="required" data-parsley-required-message="Ingrese la Fecha Requerida" placeholder="Fecha Requerida" aria-describedby="inputSuccess2Status">
+
+                        }
+                        <span class="fa fa-calendar-o form-control-feedback left" aria-hidden="true"></span>
+                        <span id="inputSuccess2Status" class="sr-only">(success)</span>
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="middle-name" class="control-label col-md-2 col-sm-2 col-xs-12">Proveedor</label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+
+                        @if (Model.Proveedor.IdProveedor != 0)
+                        {
+                            <select id="Proveedor" name="Proveedor" required="required" disabled="disabled" data-parsley-required-message="Seleccione un Proveedor" class="select2_single form-control" tabindex="-1">
+                                <option value="">Seleccione</option>
+                                @foreach (ProveedorBE item in ViewBag.Proveedores)
+                                {
+                                    <option value="@item.IdProveedor">@item.RazonSocial</option>
+                                }
+                            </select>
+
+                        }
+
+                        else
+                        {
+                            <select id="Proveedor" name="Proveedor" onchange="CargarProveedor()" required="required" data-parsley-required-message="Seleccione un Proveedor" class="select2_single form-control" tabindex="-1">
+                                <option value="">Seleccione</option>
+                                @foreach (ProveedorBE item in ViewBag.Proveedores)
+                                {
+                                    <option value="@item.IdProveedor">@item.RazonSocial</option>
+                                }
+                            </select>
+                        }
+
+
+
+
+                    </div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">RUC</label>
+                    <div class="col-md-4 col-sm-4 col-xs-12">
+                        @Html.TextBoxFor(m => m.Proveedor.RUC, new { @class = "form-control col-md-7 col-xs-12", @placeholder = "Seleccione un Proveedor", @required = "required", @disabled = "disabled", data_message = "Seleccione un Proveedor" })
+
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">Direccion</label>
+                    <div class="col-md-7 col-sm-7 col-xs-12">
+
+                        @Html.TextBoxFor(m => m.Proveedor.Direccion, new { @class = "form-control col-md-7 col-xs-12", @placeholder = "Direccion", @required = "required", @disabled = "disabled", data_message = "Seleccione un Proveedor" })
+                    </div>
+
+
+
+                </div>
+
+
+
+                <fieldset class="well the-fieldset">
+                    <legend class="the-legend">Datos del Articulo</legend>
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            Nombre
+                        </label>
+                        <div class="col-md-4 col-sm-4 col-xs-12">
+
+                            <select id="Articulos" name="Articulos" class="select2_single form-control" onchange="CargarProducto()" tabindex="-1">
+                                <option value="">Seleccione</option>
+                                @foreach (ArticuloBE item in ViewBag.Articulos)
+                                {
+                                    <option value="@item.IdArticulo">@item.Nombre</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            Cantidad
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="Cantidad" name="Cantidad" onkeyup="CalcularSubTotal()" class="form-control col-md-7 col-xs-12" data-parsley-required-message="Ingrese Cantidad" type="number">
+
+                        </div>
+                        <label id="lblUnidad" style="text-align:left" class="control-label col-md-1 col-sm-1 col-xs-12"></label>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            Costo
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="Costo" name="Costo" onkeyup="CalcularSubTotal()" class="form-control col-md-7 col-xs-12" data-parsley-required-message="No se encontró Costo" type="number">
+                        </div>
+                        <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                            SubTotal
+                        </label>
+                        <div class="col-md-2 col-sm-2 col-xs-12">
+                            <input id="SubTotal" name="SubTotal" class="form-control col-md-7 col-xs-12" disabled="disabled" data-parsley-required-message="No se encontró Datos" type="number">
+                        </div>
+                        <input type="hidden" value="1" id="hfOperacion" name="hfOperacion" />
+                        <button type="submit" name="btnAgregar" id="btnAgregar" class="btn btn-round btn-info">Agregar</button>
+
+                    </div>
+
+
+                </fieldset>
+                <div class="ln_solid"></div>
+                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc">IdArticulo</th>
+                                        <th class="sorting_asc">Descripcion</th>
+                                        <th class="sorting_asc">Unidad</th>
+                                        <th class="sorting_asc">Cantidad</th>
+                                        <th class="sorting_asc">Costo</th>
+                                        <th class="sorting_asc">SubTotal</th>
+                                        <th class="">M</th>
+                                        <th class="">E</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ordenes"></tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+                    <label class="control-label col-md-3 col-md-offset-6 col-sm-2 col-xs-12">
+                        TOTAL
+                    </label>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type="text" placeholder="Total" id="Total" name="Total" disabled="disabled" class="form-control col-md-7 col-xs-12">
+                    </div>
+                </div>
+
+
+
+                <div class="ln_solid"></div>
+                <div class="form-group">
+                    <div class="col-md-12 col-sm-12 col-xs-12" style="text-align:center">
+                        <input type="hidden" id="hfIdOrden" name="hfIdOrden" value="0" />
+
+                        <button type="submit" id="btnGuardar" name="btnGuardar" class="btn btn-primary btn-lg">Guardar</button>
+                        @if (Model.IdOrdenCompra == 0)
+                        {
+                            <button type="submit" onclick="Imprimir(event);" class="btn btn-success btn-lg">Imprimir</button>
+                        }
+                        else
+                        {
+                            <button type="submit" onclick="Imprimir(event);" disabled="disabled" class="btn btn-success btn-lg">Imprimir</button>
+                        }
+                    </div>Fecha
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<!-- jQuery -->
+<!-- Select2 -->
+<!-- Datatables -->
+
+
+
+
+
+<script type="text/javascript">
+    function CargarProducto() {
+        $("#Proveedor").trigger("change");
+        console.log(document.getElementById("Proveedor").value);
+        if (document.getElementById("Proveedor").value == 0) {
+            alert('Seleccione un Proveedor');
+            return;
+        }
+        else if (document.getElementById("Articulos").selectedIndex == 0) {
+            $("#Cantidad").val("");
+            $("#Costo").val("");
+            $("#SubTotal").val("");
+            $("#lblUnidad").text("");
+            //LimpiarArticulo();
+        }
+        else {
+            console.log( $('#Proveedor').val());
+            $.ajax({
+                url: rootDir + "/OrdenCompra/CargarProducto",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                data: {
+
+                    "IdProveedor": $('#Proveedor').val(),
+                    "IdArticulo": $('#Articulos').val(),
+                },
+                dataType: "json",
+                success: function (data) {
+
+                    if ($("#Cantidad").val() == "") {
+                        $("#Cantidad").val(1);
+                    }
+                    var Cantidad = parseFloat($("#Cantidad").val()).toFixed(2);
+
+                    $("#Costo").val(data.Costo.toFixed(2));
+                    $("#SubTotal").val((Cantidad * data.Costo).toFixed(2));
+                    $("#lblUnidad").text(data.UnidadMedida);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+        }
+    }
+    function LimpiarProveedor() {
+        $("#Proveedor_RUC").val("");
+        $("#Proveedor_Direccion").val("");
+    }
+    function LimpiarArticulo() {
+        $("#Articulos").val("");
+        $("#Articulos").trigger("change");
+        $("#Cantidad").val("");
+        $("#Costo").val("");
+        $("#SubTotal").val("");
+        $("#lblUnidad").text("");
+
+    }
+    function CargarProveedor() {
+        console.log(document.getElementById("Proveedor").selectedIndex);
+        if (document.getElementById("Proveedor").selectedIndex == 0) {
+            LimpiarProveedor();
+            LimpiarArticulo();
+
+        } else {
+
+            $.ajax({
+                url: rootDir + "/OrdenCompra/CargarProveedor",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                data: {
+                    "IdProveedor": $('#Proveedor').val(),
+                },
+                dataType: "json",
+                success: function (data) {
+                    console.log(data.RUC);
+                    console.log(data.Direccion);
+                    $('#Proveedor_RUC').val(data.RUC);
+                    $('#Proveedor_Direccion').val(data.Direccion);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+
+
+        }
+
+
+    }
+    function CalcularSubTotal() {
+
+        var Cantidad = parseFloat($("#Cantidad").val());
+        var Costo = parseFloat($("#Costo").val());
+        $("#SubTotal").val(Cantidad * Costo);
+    }
+    function CalcularTotal() {
+
+        var table = $("#datatable").DataTable();
+        var da = table.rows().data();
+
+
+        var total = 0;
+        da.each(function (value, index) {
+
+            total += parseFloat(value[5]);
+            console.log(value[5]);
+        });
+
+
+        $("#Total").val(total.toFixed(2));
+    }
+
+
+
+    function onSucess() {
+        alert('1');
+
+    }
+    function modificar() {
+        e.preventDefault();
+
+    }
+</script>
+
+
+<!-- Parsley -->
+<script>
+    var d = new Date();
+    var mindate = d.getDate() + "/" + (d.getMonth() + 1) + "/" + d.getFullYear();
+
+    function Imprimir(e) {
+
+        e.preventDefault();
+        console.log($("#hfIdOrden").val());
+        PopupCenter(rootDir + '/OrdenCompra/Imprimir?IdOrden=' + $("#hfIdOrden").val(), 'Orden de Compra', '900', '500');
+    }
+
+   
+    $(document).ready(function () {
+
+        var IdOrden=@Model.IdOrdenCompra;
+        if(IdOrden == 0){
+            $('#FechaRequerida').daterangepicker({
+                singleDatePicker: true,
+                singleClasses: "picker_1",
+                minDate: mindate,
+                locale: {
+                    format: 'DD/MM/YYYY'
+                },
+                autoUpdateInput: false
+            },  function (chosen_date) {
+                $('#FechaRequerida').val(chosen_date.format('DD/MM/YYYY'));
+            });
+        }else{
+            $('#FechaRequerida').daterangepicker({
+                singleDatePicker: true,
+                singleClasses: "picker_1",
+                locale: {
+                    format: 'DD/MM/YYYY'
+                },
+                autoUpdateInput: false
+            },  function (chosen_date) {
+                $('#FechaRequerida').val(chosen_date.format('DD/MM/YYYY'));
+            });
+
+            console.log("Proveedor:"+@Model.Proveedor.IdProveedor);
+            $("#Proveedor").val(@Model.Proveedor.IdProveedor);
+            $("#Proveedor").trigger("change");
+        }
+
+
+
+        $('#datatable').dataTable(
+    {
+             "sDom": '<"hide"i>rt<"bottom"lp><"clear">',
+             "columnDefs": [
+          {
+              "targets": [0],
+              "visible": false,
+              "searchable": false
+          },
+           {
+               "targets": [6],
+               "className": 'editar',
+               "orderable": false,
+               "data": null,
+               "defaultContent": '<i class="glyphicon glyphicon-edit"></i>'
+           },
+            {
+                "targets": [7],
+                "className": 'eliminar',
+                "orderable": false,
+                "data": null,
+                "defaultContent": '<i class="glyphicon glyphicon-remove"></i>'
+            }
+
+             ],
+             "language": {
+                 "sProcessing": "Procesando...",
+                 "sLengthMenu": "Mostrar _MENU_ registros",
+                 "sZeroRecords": "No se encontraron resultados",
+                 "sEmptyTable": "Ningún dato disponible en esta tabla",
+                 "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                 "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                 "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                 "sInfoPostFix": "",
+                 "sSearch": "Buscar:",
+                 "sUrl": "",
+                 "sInfoThousands": ",",
+                 "sLoadingRecords": "Cargando...",
+                 "oPaginate": {
+                     "sFirst": "Primero",
+                     "sLast": "Último",
+                     "sNext": "Siguiente",
+                     "sPrevious": "Anterior"
+                 },
+                 "oAria": {
+                     "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                     "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                 }
+             }
+    });
+
+    var edit;
+
+
+    $('#datatable tbody').on('click', 'td.editar', function () {
+        var table = $('#datatable').DataTable();
+        console.log(this);
+        var data = table.row(this).data();
+        edit = this;
+        $("#Articulos").val(data[0]);
+
+        $("#Articulos").trigger("change");
+        $("#lblUnidad").val(data[2]);
+        $("#Cantidad").val(data[3]);
+        $("#Costo").val(data[4]);
+        $("#SubTotal").val(data[5]);
+        $("#hfOperacion").val(2);
+
+        $("#btnAgregar").text("Modificar");
+
+    });
+    $('#datatable tbody').on('click', 'td.eliminar', function () {
+        var table = $('#datatable').DataTable();
+        console.log(this);
+
+        var data = table.row(this).data();
+        table
+      .row($(this).parents('tr'))
+      .remove().draw();
+        CalcularTotal();
+    });
+
+
+    $('#btnAgregar').click(function (e) {
+        e.preventDefault();
+        var validar = true;
+        if (document.getElementById("Articulos").selectedIndex == 0) {
+            validar = false;
+            alert('Seleccione un Articulo');
+        }
+        else if (document.getElementById("Cantidad").value == "" || document.getElementById("Cantidad").value == 0) {
+            validar = false;
+            alert('Ingrese Cantidad');
+        }
+        else if (document.getElementById("Costo").value == "" || document.getElementById("Costo").value == 0) {
+            validar = false;
+            alert('Ingrese Costo');
+        }
+
+
+
+
+        var t = $('#datatable').DataTable();
+        var da = t.rows().data();
+        var IdArticulo = $("#Articulos").val();
+
+        console.log($("#hfOperacion").val());
+
+        if (validar == true) {
+
+            //Editar
+            if ($("#hfOperacion").val() == 2) {
+                console.log(edit);
+                da.row(edit).data([IdArticulo,
+                                 $("#Articulos option:selected").text(),
+                             $("#lblUnidad").text(),
+                          parseFloat($('#Cantidad').val()).toFixed(2),
+                             parseFloat($('#Costo').val()).toFixed(2),
+                             parseFloat($('#SubTotal').val()).toFixed(2)]).draw();
+
+                /* da.each(function (value, index) {
+                     var id = value[0];
+                     if (id == IdArticulo) {
+                         console.log(this);
+                         this.data([
+                                 IdArticulo,
+                                 $("#Articulos option:selected").text(),
+                             $("#lblUnidad").text(),
+                             $('#Cantidad').val(),
+                             $('#Costo').val(),
+                             $('#SubTotal').val()]).draw();
+                     }
+                 });*/
+
+                LimpiarArticulo();
+                $("#hfOperacion").val(1);
+                $("#btnAgregar").text("Agregar");
+            } else {
+                var encontrado = false;
+                da.each(function (value, index) {
+                    var id = value[0];
+                    if (id == IdArticulo) {
+                        encontrado = true;
+                    }
+                });
+
+                //Insertar
+                if (encontrado == true) {
+                    alert("El Item Seleccionado ya existe en la lista, cambie la cantidad.")
+                    return;
+                }
+
+                var t = $('#datatable').DataTable();
+
+                t.row.add([
+                     IdArticulo,
+                    $("#Articulos option:selected").text(),
+                        $("#lblUnidad").text(),
+                        parseFloat($('#Cantidad').val()).toFixed(2),
+                        parseFloat($('#Costo').val()).toFixed(2),
+                        parseFloat($('#SubTotal').val()).toFixed(2)
+
+                ]).draw();
+
+                LimpiarArticulo();
+
+            }
+            CalcularTotal();
+        }
+    });
+
+
+
+
+
+    $('#frmdatos').submit(function (e) {
+        var serializedForm = $(this).serialize();
+        var t = $('#datatable').DataTable();
+
+        if (!t.data().count()) {
+            alert("No se ha registrado ningún Artículo");
+            e.preventDefault();
+            return;
+        }
+
+
+        var da = t.rows().data();
+
+        var Articulos = [];
+        da.each(function (value, index) {
+            console.log(value);
+            Articulos.push({ IdArticulo: value[0], Cantidad: value[3], Costo: value[4], SubTotal: value[5] });
+            console.log(Articulos[0]);
+            e.preventDefault();
+            return;
+        });
+
+
+
+
+
+        $.ajax({
+            type: 'POST',
+            url: rootDir + '/OrdenCompra/GuardarOrden',
+            data: {
+                "Direccion": $('#Direccion').val(),
+                "IdProveedor": $("#Proveedor").val(),
+                "Articulos": JSON.stringify(Articulos)
+            }
+            ,
+            dataType: 'json',
+            success: function (data) {
+
+
+                //alert(data.success);
+                //alert('Hoja de ruta ' + varHojaRutaFormat + zeroPad(varIdHojaRuta, 4) + ' creado.');
+
+                location.href = rootDir + "/OrdenCompra/Index"
+
+            },
+            error: function () {
+                alert("Error al Guardar la Orden de Compra");
+            }
+        });
+
+        return false;
+
+    });
+
+
+
+    $(".select2_single").select2({
+        allowClear: true
+    });
+
+    $('#select2_single').on("select2_single:selecting", function (e) {
+        // what you would like to happen
+    });
+
+
+
+    var IrOden=@Model.IdOrdenCompra;
+    //Cargar la Lista
+    if(IrOden!=0){
+
+        var t = $('#datatable').DataTable();
+        var model =  @Html.Raw(Json.Encode(Model.Articulos))
+
+        console.log(model);
+
+        var result = $.grep(model, function (e) {
+            console.log(e.Nombre);
+            t.row.add([
+      e.IdArticulo,
+      e.Nombre,
+      e.UnidadMedida,
+      e.Cantidad,
+      e.Costo,
+      e.SubTotal]).draw();
+        });
+        CalcularTotal();
+    }
+
+
+
+
+    });
+    try {
+        hljs.initHighlightingOnLoad();
+    } catch (err) { }
+</script>
+
+
+<!-- /Parsley -->

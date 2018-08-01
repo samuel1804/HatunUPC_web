@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f7eaf7e2ddea4232b5d834777e218a2b" Name="Diagram1" ZoomLevel="53">
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Articulo" Width="1.5" PointX="3" PointY="15" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Carta_Aprobacion" Width="1.5" PointX="8.25" PointY="33.25" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Categoria" Width="1.5" PointX="0.75" PointY="16" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Dominio" Width="1.5" PointX="10.75" PointY="12" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Especialidad" Width="1.5" PointX="0.75" PointY="37.25" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Establecimiento" Width="1.5" PointX="3.75" PointY="24.25" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Establecimiento_Articulo" Width="1.5" PointX="8.25" PointY="15.625" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_GuiaDespacho_Articulo" Width="1.5" PointX="8.25" PointY="12.875" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_GuiaRemision_Articulo" Width="1.5" PointX="9.75" PointY="18.75" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_InformeVisita" Width="1.5" PointX="8.25" PointY="25" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Ingeniero" Width="1.5" PointX="6" PointY="29.75" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Maestro" Width="1.5" PointX="3" PointY="36.125" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Maestro_Obra" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Marca" Width="1.5" PointX="0.75" PointY="13" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Obra" Width="1.5" PointX="2.875" PointY="2.5" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Obra_Material" Width="1.5" PointX="5.25" PointY="12.875" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Option" Width="1.5" PointX="10.75" PointY="2.25" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_OrdenCompra" Width="1.5" PointX="5.25" PointY="19.375" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_OrdenCompra_Articulo" Width="1.5" PointX="10.5" PointY="14.875" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Parametro" Width="1.5" PointX="13" PointY="11.625" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_PresupuestoMaterial_Articulo" Width="1.5" PointX="5.25" PointY="15.625" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_PresupuestoMo" Width="1.5" PointX="6" PointY="8.625" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_PresupuestoMo_Maestro" Width="1.5" PointX="8.25" PointY="8.875" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Proveedor" Width="1.5" PointX="3" PointY="19.625" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Proveedor_Articulo" Width="1.5" PointX="10.25" PointY="22" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Rol" Width="1.5" PointX="10.75" PointY="5.5" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Rol_Option" Width="1.5" PointX="13" PointY="4.375" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Solicitud_Persona" Width="1.5" PointX="12.25" PointY="18.125" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_User" Width="1.5" PointX="13" PointY="7.875" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="6.5" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Articulo_SG_Categoria" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Articulo_SG_Marca" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Establecimiento_Articulo_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_GuiaDespacho_Articulo_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_GuiaRemision_Articulo_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Obra_Material_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_OrdenCompra_Articulo_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMaterial_Articulo_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Proveedor_Articulo_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Proveedor_SG_Categoria" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Parametro_SG_Dominio" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Maestro_SG_Especialidad" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Establecimiento_Articulo_SG_Establecimiento" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_OrdenCompra_SG_Establecimiento" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_InformeVisita_SG_Ingeniero" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Maestro_Obra_SG_Maestro" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMo_Maestro_SG_Maestro" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Maestro_Obra_SG_Obra" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Obra_Material_SG_Obra" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMo_SG_Obra" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Rol_Option_SG_Option" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_OrdenCompra_Articulo_SG_OrdenCompra" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_OrdenCompra_SG_Proveedor" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMo_Maestro_SG_PresupuestoMo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Proveedor_Articulo_SG_Proveedor" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Rol_Option_SG_Rol" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_User_SG_Rol" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_PresupuestoMaterial" Width="1.5" PointX="13" PointY="21.125" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Solicitud" Width="1.5" PointX="6" PointY="33.375" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Carta_Aprobacion_SG_Solicitud" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMaterial_SG_Establecimiento" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Solicitud_SG_Establecimiento" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_InformeVisita_SG_Solicitud" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMaterial_SG_Obra" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMaterial_Articulo_SG_PresupuestoMaterial" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Solicitud_Persona_SG_Solicitud" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_GuiaDespacho" Width="1.5" PointX="6" PointY="25.5" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_GuiaDespacho_SG_Establecimiento" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_GuiaDespacho_Articulo_SG_GuiaDespacho" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_GuiaRemision" Width="1.5" PointX="7.5" PointY="20" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_GuiaRemision_Articulo_SG_GuiaRemision" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_GuiaRemision_SG_OrdenCompra" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Ubigeo" Width="1.5" PointX="15.375" PointY="2.625" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Persona" Width="1.5" PointX="17.625" PointY="0.875" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Persona_SG_Ubigeo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMaterial_SG_Persona" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_PresupuestoMo_SG_Persona" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Solicitud_Persona_SG_Persona" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Promocion" Width="1.5" PointX="6" PointY="37.75" />
+        <EntityTypeShape EntityType="SG_FerreteriaModel.SG_Promocion_Articulo" Width="1.5" PointX="8.25" PointY="29.875" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Promocion_Articulo_SG_Articulo" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Promocion_SG_Establecimiento" />
+        <AssociationConnector Association="SG_FerreteriaModel.FK_SG_Promocion_Articulo_SG_Promocion" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

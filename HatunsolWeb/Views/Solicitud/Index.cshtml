@@ -1,0 +1,145 @@
+﻿@model IEnumerable<HatunsolBE.SolicitudBE>
+@using HatunsolBE;
+@{
+    ViewBag.Title = "Buscar Solicitudes de Crédito";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+
+    <!-- Datatables -->
+    <script src="~/Content/vendors/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/Content/vendors/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="~/Content/vendors/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+    <script src="~/Content/vendors/jszip/dist/jszip.min.js"></script>
+
+    <script src="~/Content/vendors/pdfmake/build/pdfmake.min.js"></script>
+
+    <script src="~/Content/vendors/pdfmake/build/vfs_fonts.js"></script>
+</head>
+
+<div class="page-title">
+    <div class="title_left">
+        <h3>Lista de Solicitudes</h3>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>Buscar por Nombre:</h2>
+
+                <div class="form-group center">
+                    <div class="col-md-6 col-sm-12 col-xs-12 form-group">
+                        <input type="text" class="form-control" />
+                    </div>
+                    <button class="btn btn-success btn-lg">Buscar</button>
+                    <button class="btn btn-primary btn-lg">Nuevo</button>
+
+
+                    <div class="clearfix"></div>
+                </div>
+               
+
+            </div>
+            <div class="x_content">
+
+                <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc">Nombres y Apellidos</th>
+                                        <th class="sorting_asc">DNI</th>
+                                        <th class="sorting_asc">Telefono</th>
+                                        <th class="sorting_asc">Monto Efectivo</th>
+                                        <th class="sorting_asc">Monto Material</th>
+                                        <th class="sorting_asc">Fecha Solicitud</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+
+                                        <tr>
+                                            <td>@Html.DisplayFor(modelItem => ((PersonaBE)item.Personas[0]).Nombre)</td>
+                                            <td>@Html.DisplayFor(modelItem => ((PersonaBE)item.Personas[0]).DNI)</td>
+                                            <td>@Html.DisplayFor(modelItem => ((PersonaBE)item.Personas[0]).Telefonos)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.MontoEfectivoProp)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.MontoMaterialProp)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.FechaSolicitud)</td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+
+
+    <!-- Datatables -->
+    <script>
+        $(document).ready(function () {
+
+
+
+            $('#datatable').dataTable(
+                {
+                    "sDom": '<"hide"i>rt<"bottom"lp><"clear">',
+                    "language": {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix": "",
+                        "sSearch": "Buscar:",
+                        "sUrl": "",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    }
+                }
+                );
+
+
+        });
+    </script>
+    <!-- /Datatables -->

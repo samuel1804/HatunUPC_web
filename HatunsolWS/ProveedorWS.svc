@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="HatunsolWS.ProveedorWS" CodeBehind="ProveedorWS.svc.cs" %>

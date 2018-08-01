@@ -1,0 +1,98 @@
+﻿
+
+    <fieldset class="well the-fieldset">
+        <legend class="the-legend">Datos del Articulo</legend>
+
+
+
+        <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                Nombre
+            </label>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <input id="Producto" class="form-control col-md-7 col-xs-12" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2 col-sm-2 col-xs-12">
+                Cantidad
+            </label>
+            <div class="col-md-2 col-sm-2 col-xs-12">
+                <input id="Cantidad" class="form-control col-md-7 col-xs-12"  type="text">
+            </div>
+            <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                Precio
+            </label>
+            <div class="col-md-2 col-sm-2 col-xs-12">
+                <input id="Precio" class="form-control col-md-7 col-xs-12" type="text">
+            </div>
+            <label class="control-label col-md-1 col-sm-1 col-xs-12">
+                SubTotal
+            </label>
+            <div class="col-md-2 col-sm-2 col-xs-12">
+                <input id="SubTotal" class="form-control col-md-7 col-xs-12" type="text">
+            </div>
+            <button id="Agregar" type="submit" class="btn btn-round btn-info" onclick="Agregar();">Agregar</button>
+        </div>
+    </fieldset>
+    <div class="ln_solid"></div>
+    <div class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+        <div class="row">
+            <div class="col-sm-12">
+                <table id="datatable" class="table table-striped table-bordered dataTable no-footer" role="grid" aria-describedby="datatable_info">
+                    <thead>
+                        <tr role="row">
+                            <th class="sorting_asc">Descripcion</th>
+                            <th class="sorting_asc">Unidad</th>
+                            <th class="sorting_asc">Cantidad</th>
+                            <th class="sorting_asc">Precio</th>
+                            <th class="sorting_asc">SubTotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ordenes">
+                        <tr>
+                            <td colspan="5" align="center">Ingrese Articulos a su Orden</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+        function Agregar() {
+   
+
+
+            $.ajax({
+                url: "/OrdenCompra/Agregar",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                data: {
+                    "RazonSocial": $('#RazonSocial').val(),
+                    "Estado": $('#Estado').val(),
+                    "FechaInicio": $('#FechaInicio').val(),
+                    "FechaFin": $('#FechaFin').val(),
+                },
+                dataType: "json",
+                success: function (data) {
+                    var row = "";
+                    $.each(data, function (index, item) {
+
+
+                        row += "<tr><td>" + moment(item.Fecha_Ped).format('DD/MM/YYYY hh:mm:ss a.') + "</td>" + "<td>" + item.Establecimiento.RazonSocial + "</td><td>" + item.Establecimiento.RUC + "</td><td>" + item.Total + "</td><td><a href='Edit'>Seleccionar</td></tr>";
+                    });
+                    $("#ordenes").html(row);
+                },
+                error: function (result) {
+                    alert("Error");
+                }
+            });
+        }
+
+    </script>
